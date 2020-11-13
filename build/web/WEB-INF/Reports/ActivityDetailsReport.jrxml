@@ -1,0 +1,938 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ActivityDetailsReport" pageWidth="3390" pageHeight="1000" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="3350" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="20" uuid="33450b41-16ca-4c8f-a119-e1688f2b0900">
+	<property name="ireport.zoom" value="0.998250000000036"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="149"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="840"/>
+	<parameter name="IMAGEPATH" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="DSP_TXNTYPE" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="DSP_TXNID" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DSP_REPORT_CREATED_TIME" class="java.util.Date" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DSP_TRACENUMBER" class="java.lang.String"/>
+	<parameter name="DSP_SESSIONID" class="java.lang.String"/>
+	<parameter name="DSP_BATCHID" class="java.lang.String"/>
+	<parameter name="DSP_TERMINALTYPE" class="java.lang.String"/>
+	<parameter name="DSP_TERMINALID" class="java.lang.String"/>
+	<parameter name="DSP_AGENTCATEGORY" class="java.lang.String"/>
+	<parameter name="DSP_AGENTID" class="java.lang.String"/>
+	<parameter name="DSP_AGENTNAME" class="java.lang.String"/>
+	<parameter name="DSP_AGENTUSERNAME" class="java.lang.String"/>
+	<parameter name="DSP_RESPONSESTATUS" class="java.lang.String"/>
+	<parameter name="DSP_RESPONSECODE" class="java.lang.String"/>
+	<parameter name="S_FROM_DATE" class="java.util.Date" isForPrompting="false"/>
+	<parameter name="S_TO_DATE" class="java.util.Date" isForPrompting="false"/>
+	<parameter name="S_AGENTCATEGORY" class="java.lang.String"/>
+	<parameter name="S_AGENTID" class="java.lang.String"/>
+	<parameter name="S_AGENTNAME" class="java.lang.String"/>
+	<parameter name="S_AGENTUSERNAME" class="java.lang.String"/>
+	<parameter name="S_BATCHID" class="java.lang.String"/>
+	<parameter name="S_RESPONSECODE" class="java.lang.String"/>
+	<parameter name="S_RESPONSESTATUS" class="java.lang.String"/>
+	<parameter name="S_SESSIONID" class="java.lang.String"/>
+	<parameter name="S_TERMINALID" class="java.lang.String"/>
+	<parameter name="S_TERMINALTYPE" class="java.lang.String"/>
+	<parameter name="S_TRACENUMBER" class="java.lang.String"/>
+	<parameter name="S_TXNID" class="java.lang.String"/>
+	<parameter name="S_TXNTYPE" class="java.lang.String"/>
+	<parameter name="S_USERBRANCH" class="java.lang.String"/>
+	<parameter name="SQL_AGENTCATEGORY" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(($P{S_AGENTCATEGORY} == null || $P{S_AGENTCATEGORY}.trim().isEmpty()) ? "" : " AND AG.AGENTCATEGORY = '" + $P{S_AGENTCATEGORY} + "'")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_AGENTID" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(($P{S_AGENTID} == null || $P{S_AGENTID}.trim().isEmpty()) ? "" : " AND T.AGENTID LIKE LOWER('%" + $P{S_AGENTID} + "%')")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_AGENTNAME" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(($P{SQL_AGENTNAME} == null || $P{SQL_AGENTNAME}.trim().isEmpty()) ? "" : " AND AG.NAME LIKE LOWER('%" + $P{SQL_AGENTNAME} + "%')")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_AGENTUSERNAME" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(($P{S_AGENTUSERNAME} == null || $P{S_AGENTUSERNAME}.trim().isEmpty()) ? "" : " AND T.TERMINALUSER LIKE LOWER('%" + $P{S_AGENTUSERNAME} + "%')")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_BATCHID" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(($P{S_BATCHID} == null || $P{S_BATCHID}.trim().isEmpty()) ? "" : " AND T.BATCHID LIKE LOWER('%" + $P{S_BATCHID} + "%')")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_FROMDATE" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(($P{S_FROM_DATE} == null) ? "" : " AND T.CREATEDTIME >= TO_DATE('" + new SimpleDateFormat("yyyy-MM-dd").format($P{S_FROM_DATE}) + " 00:00:00', 'YYYY-MM-DD HH24:MI:SS')")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_RESPONSECODE" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(($P{S_RESPONSECODE} == null || $P{S_RESPONSECODE}.trim().isEmpty()) ? "" : " AND T.RESPONCECODE = '" + $P{S_RESPONSECODE} + "'")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_RESPONSESTATUS" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(($P{S_RESPONSESTATUS} == null || $P{S_RESPONSESTATUS}.trim().isEmpty()) ? "" : (($P{S_RESPONSESTATUS} == "SUCCESS") ? " AND T.RESPONCECODE = '00'" : " AND T.RESPONCECODE != '00'"))]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_SESSIONID" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(($P{S_SESSIONID} == null || $P{S_SESSIONID}.trim().isEmpty()) ? "" : " AND T.SESSION_ID LIKE LOWER('%" + $P{S_SESSIONID} + "%')")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_TERMINALID" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(($P{S_TERMINALID} == null || $P{S_TERMINALID}.trim().isEmpty()) ? "" : " AND T.TERMINALID LIKE LOWER('%" + $P{S_TERMINALID} + "%')")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_TERMINALTYPE" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(($P{S_TERMINALTYPE} == null || $P{S_TERMINALTYPE}.trim().isEmpty()) ? "" : " AND MT.TYPE = '" + $P{S_TERMINALTYPE} + "'")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_TODATE" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(($P{S_TO_DATE} == null) ? "" : " AND T.CREATEDTIME <= TO_DATE('" + new SimpleDateFormat("yyyy-MM-dd").format($P{S_TO_DATE}) + " 23:59:59', 'YYYY-MM-DD HH24:MI:SS')")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_TRACENUMBER" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[(($P{S_TRACENUMBER} == null || $P{S_TRACENUMBER}.trim().isEmpty()) ? "" : " AND T.TRACENUMBER LIKE LOWER('%" + $P{S_TRACENUMBER} + "%')")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_TXNID" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(($P{S_TXNID} == null || $P{S_TXNID}.trim().isEmpty()) ? "" : " AND T.TRANSACTIONID LIKE LOWER('%" + $P{S_TXNID} + "%')")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_TXNTYPE" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(($P{S_TXNTYPE} == null || $P{S_TXNTYPE}.trim().isEmpty()) ? "" : " AND T.ACTIVITYTYPE = '" + $P{S_TXNTYPE} + "'")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SQL_USERBRANCH" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[(($P{S_USERBRANCH} == null || $P{S_USERBRANCH}.trim().isEmpty()) ? "" : " AND AG.BRANCH " + $P{S_USERBRANCH} )]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DSP_FROMDATE" class="java.lang.String"/>
+	<parameter name="DSP_TODATE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     T.BATCHID AS BATCHID,
+     T.TERMINALID AS TERMINALID,
+     TO_CHAR(TO_DATE(A.LOGINDATETIME,'YYYYMMDDHHMISS'),'DD-MM-YYYY HH24:MI:SS') AS DSP_USER_LOGIN_DATETIME,
+     TO_CHAR(TO_DATE(A.LOGINDATETIME,'YYYYMMDDHHMISS'),'DD-MM-YYYY HH24:MI:SS') AS DSP_LAST_SUCCESSFUL_LOGIN,
+     TO_CHAR(TO_DATE(B.LOGOUTDATETIME,'YYYYMMDDHHMISS'),'DD-MM-YYYY HH24:MI:SS') AS DSP_USER_LOGOUT_DATETIME,
+     TO_CHAR(TO_DATE(B.LOGOUTDATETIME,'YYYYMMDDHHMISS'),'DD-MM-YYYY HH24:MI:SS') AS DSP_SESSION_EXPIRYTIME,
+     (CAST(TO_DATE(B.LOGOUTDATETIME,'YYYYMMDDHHMISS') AS TIMESTAMP) - CAST(TO_DATE(A.LOGINDATETIME,'YYYYMMDDHHMISS') AS TIMESTAMP)) AS DSP_SESSION_DURATION,
+     C.INVALIDLOGIN AS DSP_FAILED_LOGIN_COUNT,
+     TO_CHAR(TO_DATE(D.LASTFAILDLOGIN,'YYYYMMDDHHMISS'),'DD-MM-YYYY HH24:MI:SS') AS DSP_LAST_FAILED_LOGIN
+FROM (SELECT
+	T.BATCHID,
+	T.TERMINALID
+      FROM
+        	ACTIVITIES T
+	LEFT OUTER JOIN TERMINAL MT ON MT.TERMINALID = T.TERMINALID
+	LEFT OUTER JOIN AGENT AG ON AG.AGENTID = T.AGENTID
+      WHERE
+          1=1
+          $P!{SQL_FROMDATE}
+          $P!{SQL_TODATE}
+          $P!{SQL_TXNID}
+          $P!{SQL_TXNTYPE}
+          $P!{SQL_TRACENUMBER}
+          $P!{SQL_SESSIONID}
+          $P!{SQL_BATCHID}
+          $P!{SQL_TERMINALTYPE}
+          $P!{SQL_TERMINALID}
+          $P!{SQL_AGENTCATEGORY}
+          $P!{SQL_AGENTID}
+          $P!{SQL_AGENTNAME}
+          $P!{SQL_AGENTUSERNAME}
+          $P!{SQL_RESPONSESTATUS}
+          $P!{SQL_RESPONSECODE}
+	$P!{SQL_USERBRANCH}
+      GROUP BY
+	T.BATCHID,
+	T.TERMINALID) T
+LEFT OUTER JOIN
+      (SELECT
+	T.BATCHID,
+	T.TERMINALID,
+	T.TXN_DATETIME_MB AS LOGINDATETIME
+      FROM
+	ACTIVITIES T
+      WHERE
+	T.TRANSACTIONTYPECODE = '04'
+	AND T.RESPONCECODE = '00'
+      GROUP BY
+	T.BATCHID,
+	T.TERMINALID,
+	T.TXN_DATETIME_MB) A
+ON
+      T.BATCHID = A.BATCHID
+      AND T.TERMINALID = A.TERMINALID
+LEFT OUTER JOIN
+      (SELECT
+	T.BATCHID,
+	T.TERMINALID,
+	T.TXN_DATETIME_MB AS LOGOUTDATETIME
+      FROM
+	ACTIVITIES T
+      WHERE
+	T.TRANSACTIONTYPECODE = '40'
+	AND T.RESPONCECODE = '00'
+      GROUP BY
+	T.BATCHID,
+	T.TERMINALID,
+	T.TXN_DATETIME_MB) B
+ON
+      T.BATCHID = B.BATCHID
+      AND T.TERMINALID = B.TERMINALID
+LEFT OUTER JOIN
+      (SELECT
+	T.BATCHID,
+	T.TERMINALID,
+	COUNT(CASE WHEN T.TRANSACTIONTYPECODE = '04' AND T.RESPONCECODE != '00' THEN 1 END) AS INVALIDLOGIN
+      FROM
+	ACTIVITIES T
+      GROUP BY
+	T.BATCHID,
+	T.TERMINALID) C
+ON
+      T.BATCHID = C.BATCHID
+      AND T.TERMINALID = C.TERMINALID
+LEFT OUTER JOIN
+     (SELECT
+     	A.BATCHID,
+    	A.TERMINALID,
+    	A.LASTFAILDLOGIN
+     FROM (SELECT
+    	     T.BATCHID,
+               T.TERMINALID,
+               T.TXN_DATETIME_MB AS LASTFAILDLOGIN,
+               ROW_NUMBER() OVER (PARTITION BY T.BATCHID,T.SESSION_ID,T.TERMINALID ORDER BY T.BATCHID ) AS MAXROW
+           FROM
+               ACTIVITIES T
+           WHERE
+               T.TRANSACTIONTYPECODE = '04'
+               AND T.RESPONCECODE != '00'
+           ORDER BY
+               T.BATCHID,
+               T.TERMINALID,
+               T.TXN_DATETIME_MB DESC) A
+           WHERE A.MAXROW = 1) D
+ON
+      T.BATCHID = D.BATCHID
+      AND T.TERMINALID = D.TERMINALID]]>
+	</queryString>
+	<field name="BATCHID" class="java.lang.String"/>
+	<field name="TERMINALID" class="java.lang.String"/>
+	<field name="DSP_USER_LOGIN_DATETIME" class="java.lang.String"/>
+	<field name="DSP_USER_LOGOUT_DATETIME" class="java.lang.String"/>
+	<field name="DSP_SESSION_DURATION" class="java.lang.String"/>
+	<field name="DSP_SESSION_EXPIRYTIME" class="java.lang.String"/>
+	<field name="DSP_FAILED_LOGIN_COUNT" class="java.lang.String"/>
+	<field name="DSP_LAST_SUCCESSFUL_LOGIN" class="java.lang.String"/>
+	<field name="DSP_LAST_FAILED_LOGIN" class="java.lang.String"/>
+	<group name="ActivityBatchWise" keepTogether="true">
+		<groupExpression><![CDATA[$F{BATCHID} + $F{TERMINALID}]]></groupExpression>
+		<groupHeader>
+			<band height="365">
+				<rectangle>
+					<reportElement x="0" y="229" width="3350" height="50" backcolor="#FFFFCC" uuid="cecb0e45-c3b3-4a82-80a2-fa6e3baf97b2">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+				</rectangle>
+				<subreport>
+					<reportElement x="0" y="280" width="3350" height="75" uuid="ad4794d6-28f4-4c1e-bee0-427a7aef74ed"/>
+					<subreportParameter name="SQL_TERMINALID">
+						<subreportParameterExpression><![CDATA[$F{TERMINALID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SQL_SESSIONID">
+						<subreportParameterExpression><![CDATA[$P{SQL_SESSIONID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SQL_RESPONSECODE">
+						<subreportParameterExpression><![CDATA[$P{SQL_RESPONSECODE}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SQL_AGENTNAME">
+						<subreportParameterExpression><![CDATA[$P{SQL_AGENTNAME}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SQL_AGENTCATEGORY">
+						<subreportParameterExpression><![CDATA[$P{SQL_AGENTCATEGORY}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SQL_USERBRANCH">
+						<subreportParameterExpression><![CDATA[$P{SQL_USERBRANCH}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SQL_TERMINALTYPE">
+						<subreportParameterExpression><![CDATA[$P{SQL_TERMINALTYPE}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SQL_BATCHID">
+						<subreportParameterExpression><![CDATA[$F{BATCHID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SQL_TRACENUMBER">
+						<subreportParameterExpression><![CDATA[$P{SQL_TRACENUMBER}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SQL_AGENTID">
+						<subreportParameterExpression><![CDATA[$P{SQL_AGENTID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SQL_AGENTUSERNAME">
+						<subreportParameterExpression><![CDATA[$P{SQL_AGENTUSERNAME}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SQL_RESPONSESTATUS">
+						<subreportParameterExpression><![CDATA[$P{SQL_RESPONSESTATUS}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SQL_TXNID">
+						<subreportParameterExpression><![CDATA[$P{SQL_TXNID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SQL_TODATE">
+						<subreportParameterExpression><![CDATA[$P{SQL_TODATE}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SQL_TXNTYPE">
+						<subreportParameterExpression><![CDATA[$P{SQL_TXNTYPE}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="SQL_FROMDATE">
+						<subreportParameterExpression><![CDATA[$P{SQL_FROMDATE}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportExpression>
+				</subreport>
+				<staticText>
+					<reportElement x="6" y="233" width="94" height="20" uuid="c91e6056-79e4-40ec-a140-ecdf2d80240c"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Batch ID]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="105" y="233" width="153" height="20" uuid="866c4f45-47de-470e-b9c6-d9cb7c8281b3"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font isStrikeThrough="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{BATCHID}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="6" y="253" width="94" height="20" uuid="5d575bb0-f8ca-4bc7-8b20-dc5a79af31ff"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Terminal ID]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="105" y="253" width="153" height="20" uuid="2f2807ff-cb1c-4da6-8bbb-c594d1d059bf"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle">
+						<font isStrikeThrough="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TERMINALID}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="100" y="233" width="5" height="20" uuid="32f0f81c-6c7e-472f-9671-52640b478e7d"/>
+					<box>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="100" y="253" width="5" height="20" uuid="b4d0aade-dc2b-4f50-a0e1-a695733be53b"/>
+					<box>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement x="2853" y="52" width="496" height="166" forecolor="#000000" backcolor="#FFAE45" uuid="a97e55f0-44cc-448d-839b-70113fdc35dc"/>
+				</rectangle>
+				<textField isBlankWhenNull="true">
+					<reportElement x="3129" y="83" width="200" height="20" uuid="bcb4287a-5e7e-4ef8-90fb-72160c46a0e8"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{DSP_USER_LOGOUT_DATETIME}]]></textFieldExpression>
+				</textField>
+				<textField pattern="yyyy-MM-dd hh:mm:ss a" isBlankWhenNull="true">
+					<reportElement x="3129" y="104" width="200" height="20" uuid="4dfae4d5-4eef-4d40-9200-4dcedb5b4038"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{DSP_SESSION_DURATION}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="2875" y="62" width="253" height="20" uuid="72855939-4203-4ffb-a63f-c1c64bf5f8a3"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[USER LOGIN DATE & TIME]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2875" y="83" width="253" height="20" uuid="0d5fa681-4c80-4218-82dc-10d902b0da50"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[USER LOGOUT DATE & TIME]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2875" y="104" width="253" height="20" uuid="0158618e-39b3-4e9d-bda2-d5a948f2e398"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[SESSION DURATION]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2875" y="125" width="253" height="20" uuid="b9ea3f62-645e-4218-80cc-517ee4ca4569"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[SESSION EXPIRY TIME]]></text>
+				</staticText>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement x="3129" y="62" width="200" height="20" uuid="10e1e51c-d5c2-4e56-bdc3-e877003aefdd"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{DSP_USER_LOGIN_DATETIME}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy hh:mm:ss a" isBlankWhenNull="true">
+					<reportElement x="3129" y="125" width="200" height="20" uuid="c6786bb4-99d0-499e-82d8-02bcb24363da"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{DSP_SESSION_EXPIRYTIME}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="2875" y="146" width="253" height="20" uuid="e85a5e4f-7b6c-4831-9de2-6ed200b11d71"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[FAILED LOGIN TRIES PER DEVICE]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy hh:mm:ss a" isBlankWhenNull="true">
+					<reportElement x="3129" y="146" width="200" height="20" uuid="5affdcfa-7022-4385-8887-618583a297cd"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{DSP_FAILED_LOGIN_COUNT}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="2875" y="167" width="253" height="20" uuid="5587fe33-3772-4840-83d5-8450b94be107"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[LAST SUCCESSFUL LOGIN]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy hh:mm:ss a" isBlankWhenNull="true">
+					<reportElement x="3129" y="167" width="200" height="20" uuid="a7a2c51b-d615-498c-835b-6d451b827b05"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{DSP_LAST_SUCCESSFUL_LOGIN}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="2875" y="188" width="253" height="20" uuid="3eef3c90-24d1-4b30-82cf-721b73e85b78"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[LAST FAILED LOGIN]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy hh:mm:ss a" isBlankWhenNull="true">
+					<reportElement x="3129" y="188" width="200" height="20" uuid="878b222c-11fd-4042-80ac-809ae5ef57cb"/>
+					<box>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{DSP_LAST_FAILED_LOGIN}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="41" width="3350" height="1" uuid="27e435fd-2dd1-44db-9ec3-2d0a508ce56b"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="5"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="402" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="-20" y="0" width="3390" height="79" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="08bd635a-3634-47d0-bd36-4230bc2009db"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="3349" height="79" forecolor="#1F304A" backcolor="#CCCCCC" uuid="5d6353b2-fcf4-4c51-97c2-0546693fcb31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="48"/>
+				</textElement>
+				<text><![CDATA[Activity Details Report]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="171" height="79" uuid="fe972de9-c111-4da6-89f8-ec2613d3d85c"/>
+				<imageExpression><![CDATA[$P{IMAGEPATH}]]></imageExpression>
+			</image>
+			<elementGroup/>
+			<staticText>
+				<reportElement x="21" y="91" width="139" height="20" uuid="8aea021d-5d7a-45fb-bae7-6de67bf93f02"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[From Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="91" width="5" height="20" uuid="f8a951cf-5e38-4c41-9b6b-b2fb8c037277"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="91" width="230" height="20" uuid="235b4596-5f02-42cf-a89e-7d908e31fd52"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{DSP_FROMDATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="111" width="139" height="20" uuid="00e05660-2ef3-4b99-a39a-055d573866a7"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[To Date]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="111" width="230" height="20" uuid="083c5e78-376d-4202-8b74-ae23522522b1"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{DSP_TODATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="111" width="5" height="20" uuid="f97084c9-a173-4c8f-ac3f-769940ebe186"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="151" width="139" height="20" uuid="d412c862-91e6-44c0-940b-65e2d19a83d7"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Activity]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="151" width="230" height="20" uuid="6adc871c-cea3-4e77-a1d3-e5ee39d909e6"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{DSP_TXNTYPE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="151" width="5" height="20" uuid="1c32b2e0-df5b-4ea4-a5b1-33a0537ac116"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="171" width="230" height="20" uuid="7c486846-b07d-4216-92a0-e4a83091fad7"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DSP_TRACENUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="171" width="5" height="20" uuid="156d70db-bf10-44cc-9649-74cda5034e60"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="171" width="139" height="20" uuid="7c41a69f-252d-42a0-8093-f541c2fae5ac"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Trace Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="131" width="139" height="20" uuid="5fe10420-740f-4ce8-8168-7d9bcf3b64ea"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Transaction ID]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="131" width="230" height="20" uuid="19bd9360-db4e-47b0-8c5c-ec6168031a60"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DSP_TXNID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="131" width="5" height="20" uuid="c79445d2-8d10-46c4-95f5-f6eb2966b819"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="191" width="139" height="20" uuid="c6fa9ec5-100a-41f4-9a21-c303677ea97e"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Session ID]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="191" width="230" height="20" uuid="913885eb-8081-47a7-8fe9-fad848a92b2a"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DSP_SESSIONID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="191" width="5" height="20" uuid="0e646cde-9e9a-4310-8bee-f7854b542357"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="211" width="139" height="20" uuid="6d339782-9b22-464f-9c78-431d0dcc71cb"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Batch ID]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="211" width="230" height="20" uuid="5b58cdd4-f709-4354-a455-d943dfe73bbd"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DSP_BATCHID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="211" width="5" height="20" uuid="8aac3e14-77f1-43af-82c3-543a5d9ff5dc"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="231" width="230" height="20" uuid="ee3ab740-56fe-4ee3-83d7-f4305d46e5a4"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DSP_TERMINALTYPE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="231" width="139" height="20" uuid="7170a279-cd9d-4672-86d8-07766512f5f4"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Terminal Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="231" width="5" height="20" uuid="f8dedf23-866d-4f27-aee8-cf8b363f5d87"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="251" width="230" height="20" uuid="93137bd6-c64f-4261-ae7e-71586a0a3cda"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DSP_TERMINALID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="251" width="139" height="20" uuid="020d5bba-6b40-4fa4-ac11-f936ecd194f6"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Terminal ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="251" width="5" height="20" uuid="4bcd545f-dc0d-4352-9821-bf994fcad560"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="271" width="230" height="20" uuid="3c125c0a-434b-4b0b-9a12-22bc09a2bddb"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DSP_AGENTCATEGORY}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="271" width="139" height="20" uuid="ea3eabf7-98de-4466-846d-cd528028f513"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Agent/Officer Category]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="271" width="5" height="20" uuid="aa005af3-d347-48e4-859c-5477c8eb5c69"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="291" width="230" height="20" uuid="d0094a7a-f3d8-4b82-a0d8-e7fb262ae53c"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DSP_AGENTID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="291" width="139" height="20" uuid="cf2c6f12-ccfe-452b-85b0-fee95fd03f14"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Agent/Officer ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="291" width="5" height="20" uuid="544624c7-5f68-4b44-9388-2cd2abaaaf9e"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="311" width="230" height="20" uuid="b28db648-6165-4c10-a449-a23970646a2a"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DSP_AGENTNAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="311" width="139" height="20" uuid="076c403d-ce85-4324-8ee2-da4ba97d2980"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Agent/Officer Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="311" width="5" height="20" uuid="50af9faa-ac04-461d-8b71-8d88115b5ea1"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="331" width="230" height="20" uuid="55fee9f4-aa5e-4e92-bca5-ffd1de5c9c8c"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DSP_AGENTUSERNAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="331" width="5" height="20" uuid="c5a0fd50-090d-4276-8732-dcea7c71ced3"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="331" width="139" height="20" uuid="bde587f2-9ee6-4379-b7c4-2f923b5d7e4c"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Agent/Officer Username]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="351" width="230" height="20" uuid="272235f4-a096-48de-933d-bbc5c5a81a52"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DSP_RESPONSESTATUS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="351" width="5" height="20" uuid="6e829112-ca84-49e6-bd78-edf8cdd64998"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="351" width="139" height="20" uuid="57131161-df1a-4d99-a1f0-4571fdc7406e"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Response Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="371" width="139" height="20" uuid="93ad47ed-08b9-46af-bdd9-9516f6eb35e3"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Response Code]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="165" y="371" width="230" height="20" uuid="708b440a-ea49-43dd-a786-98eeaf9d3098"/>
+				<box leftPadding="2">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DSP_RESPONSECODE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="371" width="5" height="20" uuid="92e75427-48f2-412c-b1a0-54dfc246ff8b"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="2853" y="354" width="496" height="38" forecolor="#000000" backcolor="#FFAE45" uuid="bed4e450-8936-46ce-ac43-2090ea5a6f19"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="2875" y="362" width="253" height="20" uuid="0edbb9bf-3b35-46dc-abbc-d12d05cbf97b"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORT CREATED TIME]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy hh:mm:ss a" isBlankWhenNull="true">
+				<reportElement x="3129" y="362" width="200" height="20" uuid="bce86001-c843-4166-8b57-499d7c944dcc"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{DSP_REPORT_CREATED_TIME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2853" y="331" width="130" height="18" uuid="3f8db585-21ba-453d-ba65-ac8266b39195"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUMMARY]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="1626" y="3" width="100" height="20" uuid="3258c3f3-bfa8-440d-8bd7-3007789eb52b"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

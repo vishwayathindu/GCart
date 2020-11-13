@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="baff2557-d508-4156-ac80-bc8b4b25b049">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     itemtable.`itemId` AS itemtable_itemId,
+     itemtable.`itemName` AS itemtable_itemName,
+     itemtable.`quantity` AS itemtable_quantity,
+     itemtable.`unitPrice` AS itemtable_unitPrice,
+     itemtable.`discountType` AS itemtable_discountType,
+     itemtable.`discountMethord` AS itemtable_discountMethord,
+     itemtable.`discount` AS itemtable_discount
+FROM
+     `itemtable` itemtable]]>
+	</queryString>
+	<field name="itemtable_itemId" class="java.lang.Integer"/>
+	<field name="itemtable_itemName" class="java.lang.String"/>
+	<field name="itemtable_quantity" class="java.lang.Integer"/>
+	<field name="itemtable_unitPrice" class="java.lang.Integer"/>
+	<field name="itemtable_discountType" class="java.lang.String"/>
+	<field name="itemtable_discountMethord" class="java.lang.String"/>
+	<field name="itemtable_discount" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="79" height="20" uuid="d71a0f08-28b4-43ea-97c5-acf1f8b5cade"/>
+				<text><![CDATA[itemtable_itemId]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="79" y="0" width="79" height="20" uuid="d7ba732e-7ccd-4e0a-9bd9-654df3c1d0aa"/>
+				<text><![CDATA[itemtable_itemName]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="0" width="79" height="20" uuid="19c05727-9e77-442f-af33-c07d1e7783f4"/>
+				<text><![CDATA[itemtable_quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="237" y="0" width="79" height="20" uuid="85a6cfac-70bb-4767-a69f-d8ba8fd985ec"/>
+				<text><![CDATA[itemtable_unitPrice]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="0" width="79" height="20" uuid="da45b592-27b6-4c45-afc1-042cfca64c8e"/>
+				<text><![CDATA[itemtable_discountType]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="0" width="79" height="20" uuid="e57bef48-3372-4d65-ad01-2963829cd826"/>
+				<text><![CDATA[itemtable_discountMethord]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="474" y="0" width="79" height="20" uuid="ad826c45-fe00-4b6c-82b8-e764a155d204"/>
+				<text><![CDATA[itemtable_discount]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="79" height="20" uuid="8cb746db-0819-44b6-8859-24a5f9858625"/>
+				<textFieldExpression><![CDATA[$F{itemtable_itemId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="79" y="0" width="79" height="20" uuid="fb20919c-40e8-40e1-9788-f34235ed92c3"/>
+				<textFieldExpression><![CDATA[$F{itemtable_itemName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="158" y="0" width="79" height="20" uuid="23c26423-8d01-445e-8fc5-18a8930e1a44"/>
+				<textFieldExpression><![CDATA[$F{itemtable_quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="237" y="0" width="79" height="20" uuid="27d40d9a-b7f6-40c0-9ae5-1d73ca2e84c6"/>
+				<textFieldExpression><![CDATA[$F{itemtable_unitPrice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="316" y="0" width="79" height="20" uuid="26f96fda-e7fd-43a2-b69e-dc21532849bd"/>
+				<textFieldExpression><![CDATA[$F{itemtable_discountType}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="79" height="20" uuid="679c2150-4335-45e8-a70c-b54eb9d24198"/>
+				<textFieldExpression><![CDATA[$F{itemtable_discountMethord}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="474" y="0" width="79" height="20" uuid="abfa8eb2-9d0c-4bf1-839f-0d7e549b1e24"/>
+				<textFieldExpression><![CDATA[$F{itemtable_discount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

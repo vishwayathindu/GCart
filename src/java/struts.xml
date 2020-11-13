@@ -1,0 +1,14 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- Configuration for the default package. -->
+    <include file="control.xml"/>
+    <constant name="struts.action.extension" value="blb" />
+    <package name="default" extends="struts-default">
+        
+        
+    </package>
+    
+</struts>
